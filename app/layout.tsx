@@ -1,5 +1,7 @@
-import { Metadata } from "next"
-import Navigation from "../components/navigation"
+import "../styles/global.css";
+import { Suspense } from "react";
+import { Metadata } from "next";
+import Navigation from "../components/navigation";
 
 export const metadata:Metadata = {
   title: {
@@ -7,7 +9,7 @@ export const metadata:Metadata = {
     default: "Next Movies",
   },
   description: 'The best movies on the best framework',
-}
+};
 
 export default function RootLayout({
   children,
@@ -17,9 +19,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navigation />
-        {children}
+        <header>
+          <Navigation />
+        </header>
+        <main>
+          <Suspense fallback={<div>Loading...</div>}>
+            {children}
+          </Suspense>
+        </main>
       </body>
     </html>
-  )
+  );
 }
